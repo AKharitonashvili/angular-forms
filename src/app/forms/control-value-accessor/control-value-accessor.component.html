@@ -1,0 +1,17 @@
+<div class="w-full max-x-[25rem]">
+  <form [formGroup]="form" class="flex gap-2 flex-col">
+    <app-custom-input formControlName="customControl"></app-custom-input>
+    <select class="p-4" formControlName="selectControl">
+      <option>IFrame</option>
+      <option>QR Code</option>
+      <option>Redirection</option>
+    </select>
+    <button
+      class="bg-blue-500 p-4 rounded text-white hover:bg-blue-400"
+      type="button"
+      (click)="onSubmit()"
+    >
+      Submit
+    </button>
+  </form>
+</div>
