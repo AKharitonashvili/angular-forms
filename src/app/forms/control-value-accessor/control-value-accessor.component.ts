@@ -1,29 +1,37 @@
 import { Component } from '@angular/core';
-import { CustomInputComponent } from './custom-input/custom-input.component';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { LongFormComponent } from './long-form/long-form/long-form.component';
 
 @Component({
   selector: 'app-control-value-accessor',
-  imports: [CustomInputComponent, ReactiveFormsModule],
-  templateUrl: './control-value-accessor.component.html',
-  styleUrl: './control-value-accessor.component.scss',
+  standalone: true,
+  imports: [ReactiveFormsModule, LongFormComponent],
+  template: `
+    <div class="w-full max-x-[25rem]">
+      <h1>Parent Form</h1>
+      <form [formGroup]="parentForm" (ngSubmit)="onSubmit()">
+        <app-long-form formControlName="longForm"></app-long-form>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  `,
 })
 export class ControlValueAccessorComponent {
-  form = new FormGroup({
-    customControl: new FormControl('', Validators.required),
-    selectControl: new FormControl('', Validators.required),
+  parentForm = new FormGroup({
+    longForm: new FormControl(),
   });
 
+  ngOnInit() {
+    this.parentForm.valueChanges.subscribe((values) => {
+      console.log(values);
+    });
+  }
+
   onSubmit() {
-    if (this.form.valid) {
-      console.log('Form submitted successfully');
+    if (this.parentForm.valid) {
+      console.log('Form Submitted:', this.parentForm.value);
     } else {
-      console.error('Form is invalid');
+      console.log('Form is not valid');
     }
   }
 }
