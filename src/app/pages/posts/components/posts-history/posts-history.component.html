@@ -1,0 +1,19 @@
+<div class="grid grid-cols-3 grid-rows-2 gap-4">
+  @for (post of posts() | postPagination: this.pageIndex(); track $index) {
+    <div
+      class="p-4 border border-solid border-neutral-500 h-40 flex flex-col gap-4"
+    >
+      <p class="font-bold">{{ post.title }}</p>
+      <p class="font-light overflow-ellipsis overflow-y-auto hidden-scroll">
+        {{ post.body }}
+      </p>
+    </div>
+  }
+</div>
+<mat-paginator
+  [length]="length()"
+  [pageSize]="pageLimit()"
+  [hidePageSize]="true"
+  (page)="pageChanged($event)"
+  aria-label="Select page"
+/>

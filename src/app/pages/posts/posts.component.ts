@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { PostsStore } from './store/posts.store';
 import { PostsService } from './services/posts.service';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { PAGE_LIMIT } from './consts/posts.consts';
-import { PostPaginationPipe } from './pipes/post-pagination.pipe';
+import { PostsHistoryComponent } from './components/posts-history/posts-history.component';
 
 @Component({
   selector: 'app-posts',
-  imports: [MatPaginatorModule, PostPaginationPipe],
+  imports: [PostsHistoryComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
   providers: [PostsStore, PostsService],
