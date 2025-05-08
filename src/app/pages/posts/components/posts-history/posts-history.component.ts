@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { PostPaginationPipe } from '../../pipes/post-pagination.pipe';
 import { Posts } from '../../store/posts.model';
@@ -10,9 +10,9 @@ import { Posts } from '../../store/posts.model';
   styleUrl: './posts-history.component.scss',
 })
 export class PostsHistoryComponent {
-  length = input.required<number>();
   pageLimit = input.required<number>();
   posts = input.required<Posts[]>();
+  loaded = input.required<boolean>();
 
   pageIndex = signal<number>(0);
 

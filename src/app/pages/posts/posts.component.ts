@@ -4,13 +4,17 @@ import { PostsService } from './services/posts.service';
 import { PageEvent } from '@angular/material/paginator';
 import { PAGE_LIMIT } from './consts/posts.consts';
 import { PostsHistoryComponent } from './components/posts-history/posts-history.component';
+import { PostsAddComponent } from './components/posts-add/posts-add.component';
 
 @Component({
   selector: 'app-posts',
-  imports: [PostsHistoryComponent],
+  imports: [PostsHistoryComponent, PostsAddComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
   providers: [PostsStore, PostsService],
+  host: {
+    class: 'flex flex-col gap-4',
+  },
 })
 export class PostsComponent {
   readonly #postsService = inject(PostsService);

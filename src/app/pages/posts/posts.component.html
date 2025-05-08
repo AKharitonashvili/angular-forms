@@ -1,14 +1,6 @@
-<section class="border border-solid border-neutral-500 p-4">
-  @if (!postsState.loaded()) {
-    <div class="flex justify-center items-center">
-      <div>Loading...</div>
-    </div>
-  }
-  @if (postsState.posts(); as posts) {
-    <app-posts-history
-      [length]="posts.length"
-      [pageLimit]="pageLimit()"
-      [posts]="posts"
-    />
-  }
-</section>
+<app-posts-history
+  [pageLimit]="pageLimit()"
+  [posts]="postsState.posts()"
+  [loaded]="postsState.loaded()"
+/>
+<app-posts-add />

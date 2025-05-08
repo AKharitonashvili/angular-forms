@@ -1,19 +1,29 @@
-<div class="grid grid-cols-3 grid-rows-2 gap-4">
-  @for (post of posts() | postPagination: this.pageIndex(); track $index) {
-    <div
-      class="p-4 border border-solid border-neutral-500 h-40 flex flex-col gap-4"
-    >
-      <p class="font-bold">{{ post.title }}</p>
-      <p class="font-light overflow-ellipsis overflow-y-auto hidden-scroll">
-        {{ post.body }}
-      </p>
+<section class="border border-neutral-500 p-4">
+  @if (!loaded()) {
+    <div class="flex justify-center items-center">
+      <div>Loading...</div>
     </div>
+  } @else {
+    @if (posts(); as posts) {
+      <div class="grid grid-cols-3 grid-rows-2 gap-4">
+        @for (post of posts | postPagination: this.pageIndex(); track $index) {
+          <div class="p-4 border border-neutral-500 h-52 flex flex-col gap-4">
+            <p class="font-bold">{{ post.title }}</p>
+            <p
+              class="font-light overflow-ellipsis overflow-y-auto hidden-scroll"
+            >
+              {{ post.body }}
+            </p>
+          </div>
+        }
+      </div>
+      <mat-paginator
+        [length]="posts.length"
+        [pageSize]="pageLimit()"
+        [hidePageSize]="true"
+        (page)="pageChanged($event)"
+        aria-label="Select page"
+      />
+    }
   }
-</div>
-<mat-paginator
-  [length]="length()"
-  [pageSize]="pageLimit()"
-  [hidePageSize]="true"
-  (page)="pageChanged($event)"
-  aria-label="Select page"
-/>
+</section>

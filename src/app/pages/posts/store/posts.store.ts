@@ -1,7 +1,7 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { Posts } from './posts.model';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { EMPTY, from, pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import { inject } from '@angular/core';
 import { PostsApiService } from '../services/posts-api.service';
 
@@ -23,11 +23,11 @@ export const PostsStore = signalStore(
             .getAllPosts()
             .pipe(
               tap((posts) =>
-                patchState(store, { posts, loaded: true, error: null })
-              )
-            )
-        )
-      )
+                patchState(store, { posts, loaded: true, error: null }),
+              ),
+            ),
+        ),
+      ),
     ),
-  }))
+  })),
 );
