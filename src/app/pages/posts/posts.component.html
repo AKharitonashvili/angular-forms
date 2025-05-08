@@ -3,4 +3,7 @@
   [posts]="postsState.posts()"
   [loaded]="postsState.loaded()"
 />
-<app-posts-add />
+<app-posts-add
+  (onSubmit)="submitPost($event)"
+  [submitting]="postsState.submitting()"
+/>

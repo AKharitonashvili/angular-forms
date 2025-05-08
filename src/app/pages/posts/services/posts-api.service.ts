@@ -14,4 +14,10 @@ export class PostsApiService {
       .get<Posts[]>('https://jsonplaceholder.typicode.com/posts')
       .pipe(delay(150));
   }
+
+  submitPost(body: Posts) {
+    return this.#http
+      .post<Posts[]>('https://jsonplaceholder.typicode.com/posts', body)
+      .pipe(delay(150));
+  }
 }

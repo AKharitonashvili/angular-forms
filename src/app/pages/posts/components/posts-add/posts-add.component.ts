@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -17,6 +17,8 @@ import { AddPostsForm, AddPostsValue } from '../../interfaces/posts.interfaces';
   },
 })
 export class PostsAddComponent {
+  submitting = input.required<boolean>();
+
   formGroup: FormGroup<AddPostsForm> = new FormGroup<AddPostsForm>({
     title: new FormControl('', {
       nonNullable: true,

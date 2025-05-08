@@ -7,13 +7,19 @@ import { PostsApiService } from '../services/posts-api.service';
 
 export const PostsStore = signalStore(
   { protectedState: false },
-  withState<{ posts: Posts[]; loaded: boolean; error: string | null }>({
+  withState<{
+    posts: Posts[];
+    loaded: boolean;
+    error: string | null;
+    submitting: boolean;
+  }>({
     posts: [],
     loaded: false,
     error: null,
+    submitting: false,
   }),
-  withMethods((store, postsService = inject(PostsApiService)) => ({
-    loadAllPosts: rxMethod<void>(
+  withMethods((store, postsService = inject(PostsApiService)) => {
+    const loadAllPosts$ = rxMethod<void>(
       pipe(
         tap(() => {
           patchState(store, { posts: [], error: null, loaded: false });
@@ -28,6 +34,29 @@ export const PostsStore = signalStore(
             ),
         ),
       ),
-    ),
-  })),
+    );
+
+    return {
+      loadAllPosts: loadAllPosts$,
+      submitPost: rxMethod<Posts>(
+        pipe(
+          tap(() =>
+            patchState(store, {
+              submitting: true,
+            }),
+          ),
+          switchMap((post) =>
+            postsService.submitPost(post).pipe(
+              tap(() =>
+                patchState(store, {
+                  posts: [post, ...store.posts()],
+                  submitting: false,
+                }),
+              ),
+            ),
+          ),
+        ),
+      ),
+    };
+  }),
 );
