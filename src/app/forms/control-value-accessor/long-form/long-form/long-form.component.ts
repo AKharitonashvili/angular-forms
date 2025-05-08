@@ -20,12 +20,32 @@ import {
     },
   ],
   template: `
-    <form [formGroup]="form">
-      <input formControlName="date" placeholder="Date" />
-      <input formControlName="height" placeholder="Height" />
-      <input formControlName="weight" placeholder="Weight" />
-      <input formControlName="waist" placeholder="Waist" />
-      <input formControlName="bloodPressure" placeholder="Blood Pressure" />
+    <form [formGroup]="form" class="flex flex-col gap-4">
+      <input
+        class="border border-solid border-gray-500 px-4 py-2"
+        formControlName="date"
+        placeholder="Date"
+      />
+      <input
+        class="border border-solid border-gray-500 px-4 py-2"
+        formControlName="height"
+        placeholder="Height"
+      />
+      <input
+        class="border border-solid border-gray-500 px-4 py-2"
+        formControlName="weight"
+        placeholder="Weight"
+      />
+      <input
+        class="border border-solid border-gray-500 px-4 py-2"
+        formControlName="waist"
+        placeholder="Waist"
+      />
+      <input
+        class="border border-solid border-gray-500 px-4 py-2"
+        formControlName="bloodPressure"
+        placeholder="Blood Pressure"
+      />
     </form>
   `,
 })

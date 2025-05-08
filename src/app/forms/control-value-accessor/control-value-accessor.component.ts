@@ -7,12 +7,23 @@ import { LongFormComponent } from './long-form/long-form/long-form.component';
   standalone: true,
   imports: [ReactiveFormsModule, LongFormComponent],
   template: `
-    <div class="w-full max-x-[25rem]">
-      <h1>Parent Form</h1>
-      <form [formGroup]="parentForm" (ngSubmit)="onSubmit()">
-        <app-long-form formControlName="longForm"></app-long-form>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="flex justify-center items-center">
+      <div class="w-full max-x-[25rem] flex flex-col gap-4 max-w-[400px]">
+        <h1>Parent Form</h1>
+        <form
+          [formGroup]="parentForm"
+          (ngSubmit)="onSubmit()"
+          class="flex flex-col gap-4"
+        >
+          <app-long-form formControlName="longForm"></app-long-form>
+          <button
+            class="w-full bg-blue-500 text-white hover:bg-blue-400 px-4 py-2"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   `,
 })
